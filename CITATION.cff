@@ -244,3 +244,9 @@ references:
   year: 2023
   url: https://www.10xgenomics.com/datasets/ffpe-human-breast-with-custom-add-on-panel-1-standard
   license: CC-BY-4.0
+- type: data
+  title: 'Human Lymph Node (Visium Spatial Gene Expression, Space Ranger 1.1.0)'
+  authors:
+  - name: 10x Genomics
+  url: https://www.10xgenomics.com/datasets/human-lymph-node-1-standard-1-1-0
+  license: CC-BY-4.0

@@ -131,7 +131,7 @@ def niche_scatter(sample_id: str, coords: np.ndarray, niche: np.ndarray, niche_n
     h = max(3.5, min(9.0, w * span[1] / span[0])) if span[0] > 0 else 6.0
     fig, ax = plt.subplots(figsize=(w + 1.8, h + 0.9))
     if image is not None:
-        ax.imshow(image, origin="upper", interpolation="nearest")
+        ax.imshow(image, origin="upper", interpolation="nearest", alpha=0.55)   # lighter, so the niche colours read
     n = len(niche)
     size = max(0.3, min(12.0, 40000.0 / max(n, 1)))
     rng = np.random.default_rng(0)

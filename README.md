@@ -168,4 +168,57 @@ The image contains no GPL code (squidpy and scanpy are installed without igraph 
 
 ## Citations
 
-CITATIONS_PLACEHOLDER
+Neighbourhood enrichment, co-occurrence, interaction matrix and the spatial graph (squidpy):
+
+> Palla G, Spitzer H, Klein M, Fischer D, Schaar AC, Kuemmerle LB, Rybakov S, Ibarra IL,
+> Holmberg O, Virshup I, Lotfollahi M, Richter S, Theis FJ. **Squidpy: a scalable framework for
+> spatial omics analysis.** Nat Methods 19(2):171-178 (2022).
+> https://doi.org/10.1038/s41592-021-01358-2, PMID 35102346.
+
+Cellular neighbourhoods as clusters of neighbourhood cell-type composition (the niche method):
+
+> Schürch CM, Bhate SS, Barlow GL, Phillips DJ, Noti L, Zlobec I, Chu P, Black S, Demeter J,
+> McIlwain DR, Kinoshita S, Samusik N, Goltsev Y, Nolan GP. **Coordinated Cellular Neighborhoods
+> Orchestrate Antitumoral Immunity at the Colorectal Cancer Invasive Front.** Cell
+> 182(5):1341-1359.e19 (2020). https://doi.org/10.1016/j.cell.2020.07.005, PMID 32763154.
+
+Spatial niches from neighbourhood aggregation and clustering, over samples (CellCharter; the idea,
+not its code or its expression-based features):
+
+> Varrone M, Tavernari D, Santamaria-Martínez A, Walsh LA, Ciriello G. **CellCharter reveals
+> spatial cell niches associated with tissue remodeling and cell plasticity.** Nat Genet
+> 56(1):74-84 (2024). https://doi.org/10.1038/s41588-023-01588-4, PMID 38066188.
+
+scanpy and anndata (data structures and the squidpy stack):
+
+> Wolf FA, Angerer P, Theis FJ. **SCANPY: large-scale single-cell gene expression data
+> analysis.** Genome Biol 19(1):15 (2018). https://doi.org/10.1186/s13059-017-1382-0,
+> PMID 29409532.
+
+> Virshup I, Rybakov S, Theis FJ, Angerer P, Wolf FA. **anndata: Access and store annotated data
+> matrices.** JOSS 9(101):4371 (2024). https://doi.org/10.21105/joss.04371 (not in PubMed).
+
+KMeans and the silhouette (via scikit-learn, https://scikit-learn.org):
+
+> Lloyd S. **Least squares quantization in PCM.** IEEE Trans Inf Theory 28(2):129-137 (1982).
+> https://doi.org/10.1109/TIT.1982.1056489 (not in PubMed).
+
+> Rousseeuw PJ. **Silhouettes: A graphical aid to the interpretation and validation of cluster
+> analysis.** J Comput Appl Math 20:53-65 (1987). https://doi.org/10.1016/0377-0427(87)90125-7
+> (not in PubMed).
+
+Demo data (Xenium): 10x Genomics, *FFPE Human Breast Cancer with Custom Add-on Panel*,
+replicates 1 and 2 (CC BY 4.0,
+https://www.10xgenomics.com/datasets/ffpe-human-breast-with-custom-add-on-panel-1-standard), from
+
+> Janesick A, Shelansky R, Gottscho AD, Wagner F, Williams SR, Rouault M, Beliakoff G, Morrison CA,
+> Oliveira MF, Sicherman JT, Kohlway A, Abousoud J, Drennon TY, Mohabbat SH, 10x Development
+> Teams, Taylor SEB. **High resolution mapping of the tumor microenvironment using integrated
+> single-cell, spatial and in situ analysis.** Nat Commun 14(1):8353 (2023).
+> https://doi.org/10.1038/s41467-023-43458-x, PMID 38114474.
+
+Demo data (Visium): 10x Genomics, *Human Lymph Node* (Space Ranger 1.1.0, CC BY 4.0), no DOI.
+
+Every DOI above was checked on Crossref (title, full author list, journal, year, volume, pages)
+and every PMID on PubMed (E-utilities `esearch` by DOI, then `esummary`: title, authors, year).
+`CITATION.cff` lists the same works with their full author lists.

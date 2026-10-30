@@ -27,12 +27,13 @@ application:
     - spatial-statistics
 runtime:
   cpu: 2048
-  memory: 8192
-  # standard only: squidpy (with spatialdata, dask, numba) is too heavy an image for a sensible Lambda.
-  # Measured (linux/amd64 under emulation on an M-series Mac, --memory 3g): see README "Runtime".
+  # Measured (linux/amd64 under emulation on an M-series Mac, 2 CPUs): peak 2.5 GB on 301 k cells with 24
+  # labels, 1.6 GB with 6 labels; 6 GiB leaves room for a ~500 k-cell slide. See README "Runtime".
+  memory: 6144
+  # standard only: squidpy (with spatialdata, dask, numba) makes a 2 GB image, too heavy for a sensible Lambda.
   computeTypes:
     - standard
-  timeoutSeconds: 7200
+  timeoutSeconds: 3600
 parameters:
   - name: LABEL
     type: string
