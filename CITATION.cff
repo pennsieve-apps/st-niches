@@ -1,0 +1,246 @@
+cff-version: "1.2.0"
+message: If you use this app, please cite it and the works it builds on, listed under references.
+type: software
+title: Spatial Niches
+abstract: Spatial organization of labelled observations (cell types, deconvolved spot types or spatial domains)
+  in spatial transcriptomics data - squidpy's neighbourhood enrichment, co-occurrence and interaction matrix per
+  sample and pooled, and cellular niches as clusters of every observation's neighbourhood composition over all
+  samples, with tables, a summary and figures for the workflow report.
+authors:
+- name: Pennsieve (University of Pennsylvania)
+repository-code: https://github.com/pennsieve-apps/st-niches
+license: Apache-2.0
+keywords:
+- spatial-transcriptomics
+- transcriptomics
+- single-cell
+- xenium
+- visium
+- niches
+- neighbourhood-enrichment
+references:
+- type: article
+  title: 'Squidpy: a scalable framework for spatial omics analysis'
+  authors:
+  - family-names: Palla
+    given-names: Giovanni
+  - family-names: Spitzer
+    given-names: Hannah
+  - family-names: Klein
+    given-names: Michal
+  - family-names: Fischer
+    given-names: David
+  - family-names: Schaar
+    given-names: Anna Christina
+  - family-names: Kuemmerle
+    given-names: Louis Benedikt
+  - family-names: Rybakov
+    given-names: Sergei
+  - family-names: Ibarra
+    given-names: Ignacio L.
+  - family-names: Holmberg
+    given-names: Olle
+  - family-names: Virshup
+    given-names: Isaac
+  - family-names: Lotfollahi
+    given-names: Mohammad
+  - family-names: Richter
+    given-names: Sabrina
+  - family-names: Theis
+    given-names: Fabian J.
+  year: 2022
+  journal: Nature Methods
+  volume: 19
+  issue: '2'
+  start: '171'
+  end: '178'
+  doi: 10.1038/s41592-021-01358-2
+  identifiers:
+  - type: other
+    value: "pmid:35102346"
+    description: PubMed ID
+- type: article
+  title: Coordinated Cellular Neighborhoods Orchestrate Antitumoral Immunity at the Colorectal Cancer Invasive Front
+  authors:
+  - family-names: Schürch
+    given-names: Christian M.
+  - family-names: Bhate
+    given-names: Salil S.
+  - family-names: Barlow
+    given-names: Graham L.
+  - family-names: Phillips
+    given-names: Darci J.
+  - family-names: Noti
+    given-names: Luca
+  - family-names: Zlobec
+    given-names: Inti
+  - family-names: Chu
+    given-names: Pauline
+  - family-names: Black
+    given-names: Sarah
+  - family-names: Demeter
+    given-names: Janos
+  - family-names: McIlwain
+    given-names: David R.
+  - family-names: Kinoshita
+    given-names: Shigemi
+  - family-names: Samusik
+    given-names: Nikolay
+  - family-names: Goltsev
+    given-names: Yury
+  - family-names: Nolan
+    given-names: Garry P.
+  year: 2020
+  journal: Cell
+  volume: 182
+  issue: '5'
+  start: '1341'
+  end: 1359.e19
+  doi: 10.1016/j.cell.2020.07.005
+  identifiers:
+  - type: other
+    value: "pmid:32763154"
+    description: PubMed ID
+- type: article
+  title: CellCharter reveals spatial cell niches associated with tissue remodeling and cell plasticity
+  authors:
+  - family-names: Varrone
+    given-names: Marco
+  - family-names: Tavernari
+    given-names: Daniele
+  - family-names: Santamaria-Martínez
+    given-names: Albert
+  - family-names: Walsh
+    given-names: Logan A.
+  - family-names: Ciriello
+    given-names: Giovanni
+  year: 2024
+  journal: Nature Genetics
+  volume: 56
+  issue: '1'
+  start: '74'
+  end: '84'
+  doi: 10.1038/s41588-023-01588-4
+  identifiers:
+  - type: other
+    value: "pmid:38066188"
+    description: PubMed ID
+- type: article
+  title: 'SCANPY: large-scale single-cell gene expression data analysis'
+  authors:
+  - family-names: Wolf
+    given-names: F. Alexander
+  - family-names: Angerer
+    given-names: Philipp
+  - family-names: Theis
+    given-names: Fabian J.
+  year: 2018
+  journal: Genome Biology
+  volume: 19
+  issue: '1'
+  start: '15'
+  doi: 10.1186/s13059-017-1382-0
+  identifiers:
+  - type: other
+    value: "pmid:29409532"
+    description: PubMed ID
+- type: article
+  title: 'anndata: Access and store annotated data matrices'
+  authors:
+  - family-names: Virshup
+    given-names: Isaac
+  - family-names: Rybakov
+    given-names: Sergei
+  - family-names: Theis
+    given-names: Fabian J.
+  - family-names: Angerer
+    given-names: Philipp
+  - family-names: Wolf
+    given-names: F. Alexander
+  year: 2024
+  journal: Journal of Open Source Software
+  volume: 9
+  issue: '101'
+  start: '4371'
+  doi: 10.21105/joss.04371
+- type: article
+  title: Least squares quantization in PCM
+  authors:
+  - family-names: Lloyd
+    given-names: S.
+  year: 1982
+  journal: IEEE Transactions on Information Theory
+  volume: 28
+  issue: '2'
+  start: '129'
+  end: '137'
+  doi: 10.1109/TIT.1982.1056489
+- type: article
+  title: 'Silhouettes: A graphical aid to the interpretation and validation of cluster analysis'
+  authors:
+  - family-names: Rousseeuw
+    given-names: Peter J.
+  year: 1987
+  journal: Journal of Computational and Applied Mathematics
+  volume: 20
+  start: '53'
+  end: '65'
+  doi: 10.1016/0377-0427(87)90125-7
+- type: software
+  title: scikit-learn
+  authors:
+  - name: The scikit-learn developers
+  repository-code: https://github.com/scikit-learn/scikit-learn
+  url: https://scikit-learn.org
+  license: BSD-3-Clause
+- type: article
+  title: High resolution mapping of the tumor microenvironment using integrated single-cell, spatial and in situ analysis
+  authors:
+  - family-names: Janesick
+    given-names: Amanda
+  - family-names: Shelansky
+    given-names: Robert
+  - family-names: Gottscho
+    given-names: Andrew D.
+  - family-names: Wagner
+    given-names: Florian
+  - family-names: Williams
+    given-names: Stephen R.
+  - family-names: Rouault
+    given-names: Morgane
+  - family-names: Beliakoff
+    given-names: Ghezal
+  - family-names: Morrison
+    given-names: Carolyn A.
+  - family-names: Oliveira
+    given-names: Michelli F.
+  - family-names: Sicherman
+    given-names: Jordan T.
+  - family-names: Kohlway
+    given-names: Andrew
+  - family-names: Abousoud
+    given-names: Jawad
+  - family-names: Drennon
+    given-names: Tingsheng Yu
+  - family-names: Mohabbat
+    given-names: Seayar H.
+  - name: 10x Development Teams
+  - family-names: Taylor
+    given-names: Sarah E. B.
+  year: 2023
+  journal: Nature Communications
+  volume: 14
+  issue: '1'
+  start: '8353'
+  doi: 10.1038/s41467-023-43458-x
+  identifiers:
+  - type: other
+    value: "pmid:38114474"
+    description: PubMed ID
+- type: data
+  title: 'Xenium In Situ: FFPE Human Breast Cancer with Custom Add-on Panel, replicates 1 and 2'
+  authors:
+  - name: 10x Genomics
+  year: 2023
+  url: https://www.10xgenomics.com/datasets/ffpe-human-breast-with-custom-add-on-panel-1-standard
+  license: CC-BY-4.0

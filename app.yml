@@ -1,0 +1,162 @@
+# yaml-language-server: $schema=https://schemas.pennsieve.io/app-manifest/v1.json
+schemaVersion: "1.0"
+application:
+  name: Spatial Niches
+  description: >-
+    Spatial organization of labelled observations in spatial transcriptomics data: for one label
+    column (cell types from st-celltype, cell2location's dominant_type, or st-domains' domain) it
+    computes per sample, on the spatial neighbour graph, squidpy's neighbourhood enrichment
+    (label x label permutation z-scores, plus a pooled table over samples), co-occurrence over
+    distance intervals and the interaction matrix, and clusters every observation's neighbourhood
+    composition into cellular niches (KMeans over all samples jointly, after Schürch et al. 2020
+    and CellCharter). Runs on Xenium, MERSCOPE, CosMx cells and on Visium, Visium HD and
+    Slide-seq spots. All outputs go under a folder named after LABEL so several runs can feed
+    one report.
+  type: processor
+  tags:
+    - spatial-transcriptomics
+    - transcriptomics
+    - genomics
+    - single-cell
+    - xenium
+    - merscope
+    - cosmx
+    - visium
+    - niches
+    - neighbourhood-enrichment
+    - spatial-statistics
+runtime:
+  cpu: 2048
+  memory: 8192
+  # standard only: squidpy (with spatialdata, dask, numba) is too heavy an image for a sensible Lambda.
+  # Measured (linux/amd64 under emulation on an M-series Mac, --memory 3g): see README "Runtime".
+  computeTypes:
+    - standard
+  timeoutSeconds: 7200
+parameters:
+  - name: LABEL
+    type: string
+    description: >-
+      Name of this run (lowercase letters, digits, '-'); every output is written under
+      OUTPUT_DIR/<LABEL>/ so runs on cell types and on domains can feed one report. Empty: the
+      LABEL_COLUMN with '_' as '-' (cell_type -> cell-type, dominant_type -> dominant-type).
+    defaultValue: ""
+  - name: LABEL_COLUMN
+    type: string
+    description: Column of labels.csv to analyse (cell_type, dominant_type, domain, cluster, ...).
+    defaultValue: cell_type
+  - name: N_RINGS
+    type: integer
+    description: Visium hex grid only - rings of neighbours in the spatial graph (1 = the 6 adjacent spots).
+    defaultValue: 1
+    min: 1
+  - name: NEIGHBOURS
+    type: string
+    description: >-
+      Non-grid data - 'delaunay' for the Delaunay triangulation (cells), or an integer k for the k
+      nearest neighbours (6 for Visium HD / Slide-seq bins).
+    defaultValue: delaunay
+  - name: MAX_NEIGHBOUR_DISTANCE
+    type: number
+    description: >-
+      Non-grid data - edges longer than this times uns['pennsieve']['spot_diameter'] are dropped
+      so sparse regions don't connect across gaps; 0 = no cap.
+    defaultValue: 3.0
+    min: 0
+  - name: N_PERMS
+    type: integer
+    description: Label permutations for the neighbourhood-enrichment z-scores (per sample and pooled).
+    defaultValue: 1000
+    min: 1
+  - name: N_INTERVALS
+    type: integer
+    description: >-
+      Distance intervals for the co-occurrence ratio, from 0 to 50 x spot_diameter (at most half
+      the sample's extent) in equal steps.
+    defaultValue: 20
+    min: 1
+  - name: MAX_OBS_FOR_COOCCURRENCE
+    type: integer
+    description: >-
+      Co-occurrence is computed on a seeded subsample of at most this many observations per sample
+      (its cost grows with the square of the count); 0 = all.
+    defaultValue: 20000
+    min: 0
+  - name: NICHE_HOPS
+    type: integer
+    description: >-
+      An observation's neighbourhood for the niches is itself plus every graph neighbour within this
+      many hops (2 = neighbours and their neighbours).
+    defaultValue: 2
+    min: 1
+  - name: NICHE_K
+    type: integer
+    description: >-
+      When > 0, the neighbourhood is instead the observation plus its K nearest observations by
+      distance (Schürch et al. use 10), ignoring NICHE_HOPS.
+    defaultValue: 0
+    min: 0
+  - name: N_NICHES
+    type: integer
+    description: >-
+      Number of niches (KMeans clusters over all samples); 0 = choose 3..10 by the best silhouette
+      on a subsample of 10,000 neighbourhoods.
+    defaultValue: 0
+    min: 0
+  - name: MAX_PLOTS
+    type: integer
+    description: Co-occurrence line plots for at most this many labels (those departing most from 1 at short range).
+    defaultValue: 6
+    min: 0
+  - name: SEED
+    type: integer
+    description: Seed for the permutations, the subsamples and KMeans.
+    defaultValue: 42
+  - name: THREADS
+    type: integer
+    description: Threads for numba/BLAS; 0 = from the container's CPU quota.
+    defaultValue: 0
+    min: 0
+# Each input in its own folder (placement: subfolder) when linked; without links the files are
+# found by name anywhere under INPUT_DIR.
+inputs:
+  - name: spatial
+    description: >-
+      <sample_id>.h5ad per sample as st-qc writes them (obsm['spatial'], uns['pennsieve'] with
+      platform, spot_diameter and grid; only obs, coordinates and the lowres image are read).
+    mediaTypes:
+      - application/x-hdf5
+    formats:
+      - format_3590
+    placement: subfolder
+    required: true
+  - name: labels
+    description: >-
+      labels.csv (sample_id, obs_id, label columns) from st-celltype (cell_type), cell2location
+      (dominant_type) or st-domains (domain).
+    mediaTypes:
+      - text/csv
+    placement: subfolder
+    required: true
+  - name: metadata
+    description: st-prep's samples.csv (sample_id, path, platform, kind, ...), to list and order the samples.
+    mediaTypes:
+      - text/csv
+      - application/json
+    placement: subfolder
+    required: true
+# One output: the whole of OUTPUT_DIR; the app writes into OUTPUT_DIR/<LABEL>/.
+outputs:
+  - name: niches
+    description: >-
+      <LABEL>/labels.csv (sample_id, obs_id, niche), nhood_enrichment.csv (sample_id or pooled,
+      label_a, label_b, zscore, count), co_occurrence.csv (sample_id, label_a, label_b, distance,
+      ratio), interactions.csv (sample_id, label_a, label_b, fraction), niche_composition.csv
+      (niche, label, fraction, enrichment, neighbourhood_fraction, n_obs), niche_summary.csv
+      (sample_id, niche, n_obs, fraction), summary.json, nhood_enrichment.png (pooled) and
+      <sample_id>_nhood_enrichment.png, <sample_id>_niches.png, niche_composition.png,
+      co_occurrence_<label>.png, provenance.json.
+    mediaTypes:
+      - text/csv
+      - application/json
+      - image/png
