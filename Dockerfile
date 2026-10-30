@@ -20,7 +20,8 @@ ENV PYTHONPATH="/processor" \
     NUMBA_CACHE_DIR=/tmp/numba
 
 # Build matplotlib's font cache now (as the run-time user would), so a run needs no writes outside /tmp.
-RUN python -c "import matplotlib.pyplot" && chmod -R a+rwX /tmp/matplotlib
+# Every cache dir that exists at build time is made writable for uid 1000 (numba compiles at run time).
+RUN python -c "import matplotlib.pyplot" && mkdir -p /tmp/numba && chmod -R a+rwX /tmp/matplotlib /tmp/numba
 
 # Runs as uid 1000 on the platform; nothing here needs root.
 USER 1000

@@ -118,7 +118,27 @@ RESULTS_PLACEHOLDER
 
 ## Runtime
 
-RUNTIME_PLACEHOLDER
+`computeTypes: [standard]`, 2 vCPU / 6 GiB, 1 h timeout. squidpy brings spatialdata, dask,
+geopandas and numba, so the image is 2.1 GB, too heavy for a sensible Lambda. Samples are read
+one at a time and only their coordinates and labels are kept (about 50 bytes per observation
+plus the graph); the pooled enrichment and the niches hold every sample's graph and composition
+at once, which is small next to squidpy's co-occurrence work array (subsample × intervals ×
+labels², capped at 1 GB).
+
+Measured in the linux/amd64 image under emulation on an M-series Mac (Docker, `--memory 3g
+--cpus 2`, defaults: `N_PERMS=1000`, co-occurrence on 20,000 observations per sample):
+
+| Input | Observations | Labels | Peak memory (cgroup) | Peak RSS | Wall time |
+|---|---|---|---|---|---|
+| Synthetic, 2 × 150 k cells (Delaunay) + 1 Visium-like | 301,437 | 6 | 1.64 GB | 1.22 GB | 56 s |
+| Same, labels split into 24 | 301,437 | 24 | 2.54 GB | 1.99 GB | 79 s |
+| Xenium breast Rep1 + Rep2 (full, st-qc output, 18 stand-in labels from KMeans on PCA) | 277,475 | 18 | 2.11 GB | 1.59 GB | 70 s |
+| Human Lymph Node (Visium, st-qc output, stand-in labels) | 3,928 | 8 | 1.23 GB | 1.01 GB | 31 s |
+
+About 1 GB is the imported stack; the first enrichment and co-occurrence of a run spend ~15 s
+compiling numba kernels. The 24-label run is the realistic worst case for a Xenium slide of the
+demo's size (~285 k cells, 15–25 cell types); 6 GiB leaves room for a ~500 k-cell slide.
+REAL_RUNTIME_PLACEHOLDER
 
 ## Running it locally
 
