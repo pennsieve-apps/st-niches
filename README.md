@@ -145,8 +145,16 @@ degree 5.4–5.9; 69 s, peak 1.5 GB. Domains are spatially compact by constructi
 spot's neighbourhood is mostly its own domain and the silhouette climbs to the top of the range
 (k = 10, 0.66): on domains, set `N_NICHES` and read the niches as groups of adjacent domains.
 
-The Human Lymph Node run on cell2location's `dominant_type` (`LABEL_COLUMN=dominant_type`,
-output `dominant-type/`) is still to be done once cell2location's output exists.
+**Human Lymph Node (Visium, after cell2location).** With the fine-grained Tabula Sapiens reference
+almost every spot's `dominant_type` is `Mixed` (3,875 of 3,928), so the deconvolution workflow labels
+spots by their strongest cell2location co-location group (`LABEL_COLUMN=colocation_group`, output
+`colocation-group/`): G01 B cells (1,428 spots), G02 naive/CD4/CD8 T cells (619), G03 T/NK cells
+(601), G04 monocytes and dendritic cells, G05 erythrocytes and plasma cells, G06 plasma cells with
+stromal cells, G07 endothelial and stromal cells, G08 regulatory T cells. On the hex grid, the B-cell
+group avoids the T-zone groups (pooled z −40 with G02, −25 with G03), while the plasma/stromal and
+endothelial groups sit together (G03–G06 z 11, G06–G07 10). The silhouette chose 3 niches (0.35): a
+follicle niche (74 % G01), a T-zone niche (74 % G02) and a mixed medullary/stromal niche (G03, G06,
+G01). 35 s, peak RSS 0.97 GB (amd64 emulation, `--memory 3g --cpus 2`).
 
 ## Runtime
 
