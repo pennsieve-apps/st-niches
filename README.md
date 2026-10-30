@@ -138,7 +138,15 @@ cells (−361), fibroblasts (−308), macrophages (−200) and endothelium (−1
 35 % of Rep2), **N02** stroma (37 % fibroblasts, 15 % endothelial, 15 % macrophages; 30 % /
 39 %), **N03** immune niche (54 % T cells, 15 % macrophages; 25 % / 26 %), which on the maps
 rings the ducts and forms aggregates. 58 s, peak 1.36 GB (2 CPUs).
-LYMPH_PLACEHOLDER
+
+**TLS Visium, st-domains `domain`** (8 kidney and lung sections, 27,497 spots, 14 domains,
+`LABEL_COLUMN=domain`; a test run, not kept in the workflow repo): hex-grid graphs with mean
+degree 5.4–5.9; 69 s, peak 1.5 GB. Domains are spatially compact by construction, so each
+spot's neighbourhood is mostly its own domain and the silhouette climbs to the top of the range
+(k = 10, 0.66): on domains, set `N_NICHES` and read the niches as groups of adjacent domains.
+
+The Human Lymph Node run on cell2location's `dominant_type` (`LABEL_COLUMN=dominant_type`,
+output `dominant-type/`) is still to be done once cell2location's output exists.
 
 ## Runtime
 
@@ -164,7 +172,6 @@ Measured in the linux/amd64 image under emulation on an M-series Mac (Docker, `-
 About 1 GB is the imported stack; the first enrichment and co-occurrence of a run spend ~15 s
 compiling numba kernels. The 24-label run is the realistic worst case for a Xenium slide of the
 demo's size (~285 k cells, 15–25 cell types); 6 GiB leaves room for a ~500 k-cell slide.
-REAL_RUNTIME_PLACEHOLDER
 
 ## Running it locally
 
