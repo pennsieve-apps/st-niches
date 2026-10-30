@@ -127,7 +127,17 @@ silhouette chose 4 niches (0.44; 3–10 all 0.39–0.44): **N01** tumour epithel
 epithelial; 43 % of Rep1, 34 % of Rep2), **N02** mixed stroma (macrophages, fibroblasts,
 endothelium; 27 % / 33 %), **N03** T-cell-rich immune niche (70 % T cells; 23 % / 22 %), **N04**
 fibroblast-dense stroma (89 % fibroblasts; 7 % / 10 %). 47 s, peak 1.4 GB.
-XENIUM_FULL_PLACEHOLDER
+**Xenium breast cancer, full slides** (Rep1 160,674 + Rep2 116,801 cells after st-qc; st-celltype
+`cell_type`, 8 types; defaults; `data/work/xenium/niches/cell-type/`): Delaunay graphs with mean
+degree 5.8 and 5.7 (247 and 442 isolated cells). Pooled z-scores: homotypic contacts dominate
+(Epithelial 630, Basal/myoepithelial 439, Endothelial 315, T cell 298, Fibroblast 215); the
+strongest mixed pairs are B cell–T cell (141, lymphoid aggregates), Macrophage–T cell (78),
+Plasma cell–T cell (59) and Fibroblast–Macrophage (52); the epithelium is segregated from T
+cells (−361), fibroblasts (−308), macrophages (−200) and endothelium (−189). The silhouette chose
+3 niches (0.42; k = 4 and 5 0.41): **N01** tumour epithelium (84 % epithelial; 45 % of Rep1,
+35 % of Rep2), **N02** stroma (37 % fibroblasts, 15 % endothelial, 15 % macrophages; 30 % /
+39 %), **N03** immune niche (54 % T cells, 15 % macrophages; 25 % / 26 %), which on the maps
+rings the ducts and forms aggregates. 58 s, peak 1.36 GB (2 CPUs).
 LYMPH_PLACEHOLDER
 
 ## Runtime
@@ -146,7 +156,9 @@ Measured in the linux/amd64 image under emulation on an M-series Mac (Docker, `-
 |---|---|---|---|---|---|
 | Synthetic, 2 × 150 k cells (Delaunay) + 1 Visium-like | 301,437 | 6 | 1.64 GB | 1.22 GB | 56 s |
 | Same, labels split into 24 | 301,437 | 24 | 2.54 GB | 1.99 GB | 79 s |
-| Xenium breast Rep1 + Rep2 (full, st-qc output, 18 stand-in labels from KMeans on PCA) | 277,475 | 18 | 2.11 GB | 1.59 GB | 70 s |
+| Xenium breast Rep1 + Rep2 (full, st-celltype `cell_type`) | 277,475 | 8 | 1.36 GB | 1.04 GB | 58 s |
+| Same cells, 18 stand-in labels (KMeans on PCA) | 277,475 | 18 | 2.11 GB | 1.59 GB | 70 s |
+| Xenium 20 k-cell subsample per replicate (`cell_type`) | 38,858 | 7 | 1.40 GB | 1.06 GB | 47 s |
 | Human Lymph Node (Visium, st-qc output, stand-in labels) | 3,928 | 8 | 1.23 GB | 1.01 GB | 31 s |
 
 About 1 GB is the imported stack; the first enrichment and co-occurrence of a run spend ~15 s
