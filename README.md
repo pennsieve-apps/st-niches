@@ -114,7 +114,21 @@ the run exits 1 when every sample failed or there is no input, and 2 on bad para
 
 ## Results on the demo data
 
-RESULTS_PLACEHOLDER
+**Xenium breast cancer, 20 k-cell subsample per replicate** (st-prep `MAX_OBS_PER_SAMPLE=20000`
+→ st-qc → st-celltype `cell_type`, 7 types; defaults otherwise, output in the workflow repo
+under `data/work/xenium-20k/niches/cell-type/`): 38,858 cells, Delaunay graph capped at 40 µm
+(3 × the 13.4 µm typical cell diameter). Because the subsample keeps one cell in eight, the
+graph is sparse (mean degree 3.0 and 3.6, 1,412 and 1,247 isolated cells); on the full slides
+the mean degree is 5.8. Pooled z-scores: every type is most enriched with itself (Epithelial
+142, T cell 118, Basal/myoepithelial 103); the strongest mixed pairs are Macrophage–T cell (20)
+and Plasma cell–T cell (20), and Basal/myoepithelial–Epithelial (5.5, the duct wall); the
+epithelium avoids everything else (with T cell −84, Fibroblast −73, Macrophage −39). The
+silhouette chose 4 niches (0.44; 3–10 all 0.39–0.44): **N01** tumour epithelium (82 %
+epithelial; 43 % of Rep1, 34 % of Rep2), **N02** mixed stroma (macrophages, fibroblasts,
+endothelium; 27 % / 33 %), **N03** T-cell-rich immune niche (70 % T cells; 23 % / 22 %), **N04**
+fibroblast-dense stroma (89 % fibroblasts; 7 % / 10 %). 47 s, peak 1.4 GB.
+XENIUM_FULL_PLACEHOLDER
+LYMPH_PLACEHOLDER
 
 ## Runtime
 
@@ -179,6 +193,9 @@ with `in/spatial/` (st-qc), `in/labels/` (st-celltype, cell2location or st-domai
   embeddings, which can split niches that share a composition).
 - Co-occurrence is on a subsample and its distance axis is in the coordinate unit of each sample
   (µm or pixels); samples of different platforms are not on one axis.
+- On a subsample of cells (st-prep `MAX_OBS_PER_SAMPLE`) the cells are far apart, so the
+  `MAX_NEIGHBOUR_DISTANCE` cap leaves many of them with few or no neighbours (isolated cells
+  belong to a niche by their own label only). Use the full data for niches, or raise the cap.
 - 2 µm Visium HD bins are out of scope (as for the whole workflow).
 
 ## Licences
