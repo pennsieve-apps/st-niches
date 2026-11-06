@@ -126,7 +126,7 @@ inputs:
       <sample_id>.h5ad per sample as st-qc writes them (obsm['spatial'], uns['pennsieve'] with
       platform, spot_diameter and grid; only obs, coordinates and the lowres image are read).
     mediaTypes:
-      - application/x-hdf5
+      - "application/x-hdf5; profile=anndata"
     formats:
       - format_3590
     placement: subfolder
