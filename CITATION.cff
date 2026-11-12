@@ -1,5 +1,6 @@
 cff-version: "1.2.0"
-message: If you use this app, please cite it and the works it builds on, listed under references.
+message: >-
+  If you use this app, please cite the work it implements (preferred-citation), this release, and Pennsieve (RRID:SCR_021677); the other works it builds on are listed under references.
 type: software
 title: Spatial Niches
 abstract: Spatial organization of labelled observations (cell types, deconvolved spot types or spatial domains)
@@ -18,6 +19,48 @@ keywords:
 - visium
 - niches
 - neighbourhood-enrichment
+# The work this app implements; the release report's "How to cite" puts it first.
+preferred-citation:
+  type: article
+  title: 'Squidpy: a scalable framework for spatial omics analysis'
+  authors:
+  - family-names: Palla
+    given-names: Giovanni
+  - family-names: Spitzer
+    given-names: Hannah
+  - family-names: Klein
+    given-names: Michal
+  - family-names: Fischer
+    given-names: David
+  - family-names: Schaar
+    given-names: Anna Christina
+  - family-names: Kuemmerle
+    given-names: Louis Benedikt
+  - family-names: Rybakov
+    given-names: Sergei
+  - family-names: Ibarra
+    given-names: Ignacio L.
+  - family-names: Holmberg
+    given-names: Olle
+  - family-names: Virshup
+    given-names: Isaac
+  - family-names: Lotfollahi
+    given-names: Mohammad
+  - family-names: Richter
+    given-names: Sabrina
+  - family-names: Theis
+    given-names: Fabian J.
+  year: 2022
+  journal: Nature Methods
+  volume: 19
+  issue: '2'
+  start: '171'
+  end: '178'
+  doi: 10.1038/s41592-021-01358-2
+  identifiers:
+  - type: other
+    value: pmid:35102346
+    description: PubMed ID
 references:
 - type: article
   title: 'Squidpy: a scalable framework for spatial omics analysis'
